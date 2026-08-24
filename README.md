@@ -136,7 +136,7 @@ convidata/
 
 Integrantes del proyecto:
 
-- Vicente Vera
+- Max Fernadez
 - Rodrigo Flores
 - Matías Urria
 - Isaias Ortiz

@@ -118,6 +118,7 @@ convidata/
 ├── docs/
 │   ├── documento-0/
 │   ├── incremento-1/
+│   ├── incremento-2/
 │   ├── casos-de-uso/
 │   ├── diagramas-secuencia/
 │   ├── arquitectura-4+1/

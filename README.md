@@ -138,7 +138,6 @@ convidata/
 Integrantes del proyecto:
 
 - Max Fernadez
-- Rodrigo Flores
 - Matías Urria
 - Isaias Ortiz
 - Osvaldo Caraccioli

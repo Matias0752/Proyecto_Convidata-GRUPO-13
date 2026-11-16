@@ -1,68 +1,112 @@
 # ConviData
 
-Sistema web orientado a la gestión y seguimiento de casos de convivencia escolar, permitiendo administrar usuarios, registrar casos, visualizar estadísticas, gestionar perfiles y mantener trazabilidad de incidentes dentro del establecimiento educacional.
+Sistema web para el registro, seguimiento y análisis de casos de convivencia escolar. Permite administrar usuarios y alumnos, registrar y gestionar casos, visualizar estadísticas, generar alertas y notificaciones, y mantener la trazabilidad de los incidentes dentro del establecimiento educacional.
 
 ---
 
 ## Descripción del Proyecto
 
-ConviData es un proyecto desarrollado en el contexto de la asignatura de Ingeniería de Software, cuyo objetivo es diseñar e implementar una plataforma que permita centralizar la gestión de casos de convivencia escolar dentro de una institución educativa.
+ConviData es un proyecto desarrollado en la asignatura de Ingeniería de Software para el Colegio Particular San Sebastián de Melipilla. Su objetivo es reemplazar el registro manual y descentralizado de incidencias por una plataforma web que centralice la información de convivencia escolar y apoye la toma de decisiones del equipo directivo.
 
-El sistema contempla distintos roles de usuario, cada uno con permisos específicos para acceder a funcionalidades determinadas dentro de la plataforma.
-
-Roles contemplados:
+El sistema trabaja con cuatro roles de usuario, cada uno con permisos específicos:
 
 - Administrador
 - Inspector
+- Convivencia
 - Profesor
-- Equipo de Convivencia
 
 ---
 
 ## Objetivo General
 
-Desarrollar una plataforma web que permita optimizar la gestión, seguimiento y administración de casos relacionados con convivencia escolar, centralizando la información y facilitando el acceso según los privilegios definidos por cada rol de usuario.
+Desarrollar una plataforma web que optimice la gestión, el seguimiento y el análisis de los casos de convivencia escolar, centralizando la información y facilitando el acceso según los privilegios definidos para cada rol de usuario.
 
 ---
 
-## Funcionalidades Implementadas (Incremento 1)
+## Alcance del Proyecto
 
-Actualmente el proyecto se encuentra en fase de análisis, diseño y documentación del primer incremento.
+| Elemento | Cantidad | Estado |
+|---|---|---|
+| Requerimientos funcionales | 77 | 100 % implementados |
+| Requerimientos de usuario | 77 | 100 % implementados |
+| Requerimientos no funcionales | 11 | Definidos |
+| Casos de uso | 81 | 100 % implementados |
 
-Módulos considerados:
+---
 
-- Inicio de sesión con autenticación
-- Recuperación de contraseña
-- Cambio de contraseña en primer acceso
-- Dashboard principal
-- Gestión de casos
-- Historial de casos
-- Visualización de estadísticas
-- Gestión de usuarios
-- Gestión de alumnos
-- Perfil de usuario
-- Notificaciones
+## Funcionalidades Implementadas
+
+**Acceso y autenticación**
+- Inicio de sesión con correo institucional
+- Recuperación de contraseña mediante contraseña temporal enviada por correo
+- Cambio obligatorio de contraseña en el primer ingreso
+- Bloqueo de cuenta tras 5 intentos fallidos
+
+**Inicio y navegación**
+- Gráfico de casos por zona del colegio y panel de resumen de los últimos 30 días
+- Listado de casos paginado y ordenado del más reciente al más antiguo
+- Barra de tareas con acceso a los módulos según el rol
+
+**Gestión de casos**
+- Registro de casos con adjuntos y múltiples estudiantes involucrados
+- Historial de casos con búsqueda, filtros y contador
+- Edición dentro de 48 horas (sin límite para el Administrador)
+- Eliminación de casos con confirmación
+- Descarga de casos en PDF o XLSX
+- Solicitudes de casos del Profesor con aprobación o rechazo
+
+**Estadísticas**
+- Gráficos de barras, líneas y torta
+- Filtros por gravedad, curso, zona y rango de fechas
+- Panel de resumen con variación respecto al año anterior
+- Descarga de gráficos y datos
+
+**Notificaciones y alertas**
+- Aviso al creador cuando su caso es editado o eliminado
+- Alerta automática cuando un curso supera los 10 casos semanales
+
+**Administración**
+- Gestión de usuarios: creación, edición, búsqueda, filtros y acciones masivas
+- Historial de acciones de los usuarios
+- Gestión de alumnos: registro, importación XLSX, edición y activación o desactivación
+- Carga y visualización de documentos institucionales (Reglamento Interno y protocolos)
+
+**Perfil**
+- Visualización de datos públicos, configuración de la cuenta y cierre de sesión
+
+---
+
+## Desarrollo por Incrementos
+
+| Incremento | Módulos | RF | % del proyecto | % acumulado |
+|---|---|---|---|---|
+| Incremento 1 | Acceso, inicio, barra de tareas, perfil, registro, descarga y detalle de casos | 25 | 32,47 % | 32,47 % |
+| Incremento 2 | Historial, búsqueda, edición y eliminación de casos, gestión de usuarios y documentos institucionales | 30 | 38,96 % | 71,43 % |
+| Incremento 3 | Notificaciones, alertas, estadísticas y gestión de alumnos | 20 | 25,97 % | 97,40 % |
+| Incremento 4 | Solicitudes de casos del Profesor | 2 | 2,60 % | 100 % |
 
 ---
 
 ## Arquitectura del Sistema
 
-El proyecto utiliza arquitectura basada en el patrón MVC (Modelo Vista Controlador).
+El sistema se estructura en capas que separan la interfaz de usuario, la lógica de aplicación y la persistencia de datos, siguiendo el patrón MVC (Modelo Vista Controlador).
 
 Componentes principales:
 
-- Frontend
-- Controladores internos
+- Frontend web
 - API REST
-- Sistema de autenticación JWT
-- ORM para acceso a base de datos
-- Base de datos relacional
+- Autenticación mediante JWT
+- ORM para acceso a datos
+- Base de datos relacional PostgreSQL
+- Servicio de correos para notificaciones y contraseñas temporales
 
-Arquitectura utilizada:
+Documentación de arquitectura:
 
-- MVC
-- Arquitectura 4+1
-- Metodología Scrum++
+- Modelo de vistas 4+1
+- Diagrama de componentes
+- Diagrama de despliegue
+- Modelo de datos (MER y MERE)
+- Árbol de navegación
 
 ---
 
@@ -71,8 +115,7 @@ Arquitectura utilizada:
 Backend:
 
 - Python
-- :contentReference[oaicite:1]{index=1}
-- :contentReference[oaicite:2]{index=2}
+- Django
 - PostgreSQL
 - JWT Authentication
 
@@ -82,51 +125,58 @@ Frontend:
 - CSS
 - JavaScript
 
+Infraestructura y servicios:
+
+- Cloudflare Pages (alojamiento del frontend)
+- Resend (envío de correos)
+
 Herramientas:
 
 - Draw.io
 - Bizagi
-- Git
-- :contentReference[oaicite:3]{index=3}
+- Git y GitHub
+- Excel (Scrum++, backlog, carta Gantt y matriz de requerimientos)
 
 ---
 
-## Estado Actual
+## Estado del Proyecto
 
-Estado del proyecto:
+**Proyecto finalizado: 4 de 4 incrementos completados (100 % del alcance funcional).**
 
-Incremento 1 (30% del proyecto)
+Entregables:
 
-Actualmente se encuentra en desarrollo de:
-
-- Documento 0 corregido
-- Product Backlog
-- Sprint Planning
-- Diagramas UML
-- Diagramas de Secuencia
-- Casos de Uso Extendidos
-- Arquitectura 4+1
-- Documentación Scrum++
+- Documento 0: diagnóstico de la organización, requerimientos y casos de uso
+- Informes y presentaciones de los Incrementos 1 al 4
+- Casos de uso y diagramas de casos de uso
+- Diagramas de secuencia
+- Diagramas de base de datos, componentes y despliegue
+- Árbol de navegación
+- Pruebas funcionales del sistema con evidencias
+- Documentación Scrum++ (backlog, burnup y burndown)
 
 ---
 
 ## Estructura del Repositorio
 
 ```text
-convidata/
+Proyecto_Convidata-GRUPO-13/
 │
-├── docs/
-│   ├── documento-0/
-│   ├── incremento-1/
-│   ├── incremento-2/
-│   ├── casos-de-uso/
-│   ├── diagramas-secuencia/
-│   ├── arquitectura-4+1/
-│   └── scrum/
+├── Documento 0/
+│   ├── Carta gantt/
+│   ├── Casos de uso/
+│   ├── Confirmacion de los requerimientos/
+│   ├── Diagrama de secuencia/
+│   ├── Diagramas de casos de uso/
+│   ├── Estimación Costo y Beneficio/
+│   ├── Levantamiento de proceso/
+│   ├── Matriz de Requerimientos/
+│   └── Scrum++/
 │
-├── backend/
-│
-├── frontend/
+├── Incremento 1/
+├── Incremento 2/
+├── Incremento 3/
+├── Incremento 4/
+│   (cada incremento incluye informe, ppt, diagramas y Scrum++)
 │
 └── README.md
 ```
@@ -135,38 +185,36 @@ convidata/
 
 ## Equipo de Desarrollo
 
-Integrantes del proyecto:
-
-- Max Fernadez
+- Max Fernández
 - Matías Urria
-- Isaias Ortiz
+- Isaías Ortiz
 - Osvaldo Caraccioli
 - Maximiliano Soto
-- Benjamin Orellana
+- Benjamín Orellana
+
+Profesor: Paulo Quinsacara
+
 ---
 
 ## Metodología de Trabajo
 
-El proyecto se desarrolla bajo metodología Scrum++ considerando:
+El proyecto se desarrolló bajo la metodología Scrum++, considerando:
 
 - Product Backlog
 - Sprint Planning
 - Daily Scrum
 - Sprint Review
 - Sprint Retrospective
+- Seguimiento mediante gráficos Burnup y Burndown
 
 ---
 
 ## Versionamiento
 
-El control de versiones del proyecto es gestionado mediante Git.
-
-Se mantiene trazabilidad individual del trabajo realizado por cada integrante a través del historial de commits.
+El control de versiones se gestiona mediante Git y GitHub, manteniendo la trazabilidad del trabajo realizado por cada integrante a través del historial de commits.
 
 ---
 
 ## Estado Académico
 
-Proyecto desarrollado para la asignatura:
-
-Ingeniería de Software I – Año 2026
+Proyecto desarrollado para la asignatura Ingeniería de Software – Año 2026.
